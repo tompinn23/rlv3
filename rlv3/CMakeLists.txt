@@ -7,7 +7,7 @@ cmake_minimum_required (VERSION 3.8)
 add_subdirectory(Dependencies)
 
 # Add source to this project's executable.
-add_executable (rlv3 rlv3.cpp u-util.cpp)
+add_executable (rlv3 rlv3.cpp u-util.cpp data.cpp)
 target_include_directories(rlv3 PRIVATE ./)
 
 target_link_libraries(rlv3 spdlog sol)

@@ -4,10 +4,12 @@
 #include "top-level.h"
 
 #include <string>
+#include <vector>
 
 void init_stuff();
 void init_logging();
 
 void quit(std::string msg, int error_code);
+
 
 #endif

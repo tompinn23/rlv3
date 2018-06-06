@@ -22,8 +22,8 @@ target_compile_definitions (libluadll PRIVATE _CRT_SECURE_NO_WARNINGS LUA_BUILD_
 set_target_properties (libluadll PROPERTIES OUTPUT_NAME lua53)
 target_include_directories(libluadll PUBLIC src/)
 
-#add_executable (lua ${SRC_LUA})
-#target_link_libraries (lua libluadll)
+add_executable (lua ${SRC_LUA})
+target_link_libraries (lua libluadll)
 
 #add_executable (luac ${SRC_LUAC})
 #target_link_libraries (luac liblua)

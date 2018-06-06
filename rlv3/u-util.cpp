@@ -46,6 +46,8 @@ void init_logging()
 		quit("Log initialization failed: " + std::string(ex.what()), EXIT_FAILURE);
 	}
 }
+
+
 void quit(std::string msg, int exit_code)
 {
 	std::cerr << msg << "\n";
