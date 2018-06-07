@@ -27,8 +27,9 @@ public:
 	~Data();
 	bool init_rooms(sol::table table);
 	bool init_data(sol::table table);
+	void print_room(int idx);
 private:
-	std::vector<rl_room> rooms;
+	std::vector<rl_room*> m_rooms;
 };
 
 #endif

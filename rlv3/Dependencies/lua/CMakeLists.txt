@@ -1,4 +1,4 @@
-project (lua C)
+project (lua CXX)
 cmake_minimum_required (VERSION 2.8)
 
 #include_directories (src ${CMAKE_CURRENT_BINARY_DIR})
@@ -18,12 +18,17 @@ set ( SRC_LUAC src/luac.c )
 #target_include_directories(liblua PUBLIC src/)
 
 add_library (libluadll SHARED ${SRC_CORE} ${SRC_LIB})
+if(WIN32)
 target_compile_definitions (libluadll PRIVATE _CRT_SECURE_NO_WARNINGS LUA_BUILD_AS_DLL )
+endif()
+#if(UNIX)
+#target_compile_definitions (libluadll PRIVATE LUA_USE_LINUX)
+#endif()
 set_target_properties (libluadll PROPERTIES OUTPUT_NAME lua53)
 target_include_directories(libluadll PUBLIC src/)
 
-add_executable (lua ${SRC_LUA})
-target_link_libraries (lua libluadll)
+#add_executable (lua ${SRC_LUA})
+#target_link_libraries (lua libluadll)
 
 #add_executable (luac ${SRC_LUAC})
 #target_link_libraries (luac liblua)
