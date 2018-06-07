@@ -16,6 +16,7 @@ struct rl_room {
 	std::vector<char> map;
 	rl_room(std::string name, int width, int height, std::vector<char> map);
 	rl_room(sol::table &room);
+	char get_tile(int x, int y);
 };
 
 

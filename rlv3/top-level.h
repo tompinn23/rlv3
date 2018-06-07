@@ -1,6 +1,7 @@
 #ifndef TOP_H
 #define TOP_H
 
+#include "config.h"
 
 #if defined(_WIN32)
 #define Windows // Windows

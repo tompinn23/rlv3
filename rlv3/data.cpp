@@ -1,6 +1,7 @@
 #include "data.h"
 
 #include "spdlog/spdlog.h"
+#include "sol.hpp"
 
 rl_room::rl_room(std::string name, int width, int height, std::vector<char> map) : 
 	name(name), width(width), height(height), map(map) 
@@ -17,15 +18,27 @@ rl_room::rl_room(sol::table &room)
 	sol::table plan = room.get<sol::table>("plan");
 	map.resize(height * width);
 	log->info(height * width);
-	for (int j = 1; j <= plan.size(); j++)
+	for (int j = 1; j <= height; j++)
 	{
+		log->info(j);
+		log->info(j - 1);
 		std::string line = plan.get<std::string>(j);
 		for (int k = 0; k < width; k++)
 		{
-			log->info(k*width + j - 1);
-			map[k * width + j - 1] = line[k];
+			//log->info((j -1) *width + k);
+			log->info("{}, {}",k,(j - 1));
+			map[k * width + (j-1)] = line[k];
 		}
 	}
+}
+
+char rl_room::get_tile(int x, int y)
+{
+	if (x < 0 || y < 0)
+		return ' ';
+	if (x >= width || y >= height)
+		return ' ';
+	return map[x * width + y];
 }
 
 Data::Data()
@@ -67,10 +80,17 @@ bool Data::init_data(sol::table table)
 void Data::print_room(int idx)
 {
 	rl_room* room = m_rooms[idx];
-	for (int i = 0; i < room->width; i++)
+	for (int i = 0; i < room->height; i++)
 	{
-		for (int j = 0; j < room->height; j++)
-			std::cout << room->map[i*room->width + j];
+		for (int j = 0; j < room->width; j++)
+			std::cout << room->get_tile(j, i);
 		std::cout << "\n";
 	}
+}
+
+bool init_datafiles()
+{
+	sol::state init_data;
+	//init_data.safe_script_file
+	return true;
 }
