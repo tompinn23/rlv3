@@ -26,4 +26,6 @@ private:
 	std::vector<std::variant<rl_file, rl_dir>> m_entry;
 	std::string m_path;
 };
+
+std::string convert_to_system_path(std::string);
 #endif

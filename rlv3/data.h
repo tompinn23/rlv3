@@ -8,6 +8,7 @@
 #include <string>
 
 #include "u-util.h"
+#include "u-file.h"
 
 struct rl_room {
 	std::string name;
@@ -32,5 +33,8 @@ public:
 private:
 	std::vector<rl_room*> m_rooms;
 };
+
+
+bool init_datafiles(rl_dir data_path, Data &data);
 
 #endif

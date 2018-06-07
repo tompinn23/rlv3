@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #cmakedefine HAVE_DIRENT
+#cmakedefine HAVE_SYS_TYPES
 #cmakedefine HAVE_WINDOWS
 #cmakedefine HAVE_FILESYSTEM
 #cmakedefine HAVE_FILESYSTEM_EXP

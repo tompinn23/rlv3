@@ -3,6 +3,8 @@
 #include "spdlog/spdlog.h"
 #include "sol.hpp"
 
+
+
 rl_room::rl_room(std::string name, int width, int height, std::vector<char> map) : 
 	name(name), width(width), height(height), map(map) 
 {
@@ -11,23 +13,24 @@ rl_room::rl_room(std::string name, int width, int height, std::vector<char> map)
 
 rl_room::rl_room(sol::table &room)
 {
-	auto log = spdlog::get("console");
+	auto log = spdlog::get("main");
 	name = room.get<std::string>("name");
 	width = room.get<int>("width");
 	height = room.get<int>("height");
 	sol::table plan = room.get<sol::table>("plan");
 	map.resize(height * width);
-	log->info(height * width);
+	log->info("Parsing Room (\"{}\") with size : {}x{}", name, width, height);
+	//log->info(height * width);
 	for (int j = 1; j <= height; j++)
 	{
-		log->info(j);
-		log->info(j - 1);
+		//log->info(j);
+		//log->info(j - 1);
 		std::string line = plan.get<std::string>(j);
 		for (int k = 0; k < width; k++)
 		{
 			//log->info((j -1) *width + k);
-			log->info("{}, {}",k,(j - 1));
-			map[k * width + (j-1)] = line[k];
+			//log->info("{}, {}",k,(j - 1));
+			map[k * height + (j-1)] = line[k];
 		}
 	}
 }
@@ -38,7 +41,7 @@ char rl_room::get_tile(int x, int y)
 		return ' ';
 	if (x >= width || y >= height)
 		return ' ';
-	return map[x * width + y];
+	return map[x * height + y];
 }
 
 Data::Data()
@@ -80,17 +83,37 @@ bool Data::init_data(sol::table table)
 void Data::print_room(int idx)
 {
 	rl_room* room = m_rooms[idx];
+	spdlog::get("console")->info("Printing room to console:");
 	for (int i = 0; i < room->height; i++)
 	{
+		std::cout << "\t";
 		for (int j = 0; j < room->width; j++)
-			std::cout << room->get_tile(j, i);
+			std::cout <<room->get_tile(j, i);
 		std::cout << "\n";
 	}
 }
 
-bool init_datafiles()
+bool init_datafiles(rl_dir data_path, Data &data)
 {
+	auto log = spdlog::get("main");
+	log->info("Parsing Data Files");
 	sol::state init_data;
-	//init_data.safe_script_file
+	init_data.open_libraries(sol::lib::base);
+	init_data["data"] = &data;
+	init_data.new_usertype<Data>("Data", "init_rooms", &Data::init_rooms);
+	for (auto entry : data_path.list_dir()) {
+		auto file = std::get_if<rl_file>(&entry);
+		if (file)
+		{
+			sol::protected_function_result result = init_data.safe_script_file(file->get_path(), sol::script_pass_on_error);
+			if (!result.valid())
+			{
+				sol::error err = result;
+				sol::call_status status = result.status();
+				log->error("So that went wrong:\n{}", err.what());
+				return false;
+			}
+		}
+	}
 	return true;
 }
