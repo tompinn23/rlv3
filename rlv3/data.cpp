@@ -105,6 +105,7 @@ bool init_datafiles(rl_dir data_path, Data &data)
 		auto file = std::get_if<rl_file>(&entry);
 		if (file)
 		{
+
 			sol::protected_function_result result = init_data.safe_script_file(file->get_path(), sol::script_pass_on_error);
 			if (!result.valid())
 			{

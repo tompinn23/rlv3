@@ -1,7 +1,10 @@
 # CMakeLists.txt : All the dependencies for rlv3
 
 # Add duktape
-add_subdirectory(duktape)
+# add_subdirectory(duktape)
+
+# Add bearlibterminal
+add_subdirectory(bearlib)
 
 # Add lua
 add_subdirectory(lua)
