@@ -3,6 +3,10 @@ add_library(bearlib SHARED IMPORTED GLOBAL)
 
 math(EXPR BITNESS "8*${CMAKE_SIZEOF_VOID_P}")
 
+if(UNIX AND NOT APPLE)
+	set(LINUX TRUE)
+endif()
+
 if(WIN32)
 	if(BITNESS EQUAL "32")
 		set_target_properties(bearlib PROPERTIES IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/rlv3/Dependencies/bearlib/Windows32/BearLibTerminal.dll")

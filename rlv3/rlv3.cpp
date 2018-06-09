@@ -4,24 +4,26 @@
 #include "rlv3.h"
 
 
-#include "spdlog/spdlog.h"
+#include "data.h"
+#include "u-file.h"
+#include "u-mem.h"
+#include "u-util.h"
+
+#include "BearLibTerminal.h"
 //#include "duktape.h"
 #define SOL_CHECK_ARGUMENTS 1
 #define SOL_IN_DEBUG_DETECTED 1
 #include "sol.hpp"
-#include "BearLibTerminal.h"
+#include "spdlog/spdlog.h"
 
 
-#include <fstream>
-#include <sstream>
-#include <random>
+
+
 #include <chrono>
+#include <fstream>
+#include <random>
+#include <sstream>
 #include <thread> 
-
-#include "u-util.h"
-#include "u-mem.h"
-#include "u-file.h"
-#include "data.h"
 
 
 using namespace std;
@@ -68,12 +70,12 @@ int main(int argc, char* argv[])
 		times.push_back(diff);
 		log->info("Took: {}ms", diff.count());
 	}
-	long long sum = 0;
+	int64_t sum = 0;
 	for (auto& n : times)
 	{
 		sum += n.count();
 	}
 	log->info("Average: {}", sum / times.size());
-	while (1);
+	while (true);
 	return 0;
 }
