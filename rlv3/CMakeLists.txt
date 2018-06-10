@@ -30,7 +30,7 @@ configure_file(config.h.in config.h)
 add_subdirectory(Dependencies)
 
 # Add source to this project's executable.
-add_executable (rlv3 rlv3.cpp u-util.cpp data.cpp u-file.cpp console.cpp)
+add_executable (rlv3 rlv3.cpp console.cpp u-util.cpp data.cpp u-file.cpp)
 target_include_directories(rlv3 PRIVATE ./)
 target_include_directories(rlv3 PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
 target_link_libraries(rlv3 spdlog sol bearlib)

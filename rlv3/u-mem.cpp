@@ -21,8 +21,8 @@
 *   Remove reliance on other z-* files
 *
 */
-#include "u-mem.h"
-#include "u-util.h"
+#include "u-mem.hpp"
+#include "u-util.hpp"
 #include <cstring>
 unsigned int mem_flags = 0;
 
