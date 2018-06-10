@@ -192,7 +192,7 @@ char_t Console::get(int x, int y)
 		char* buf = new char[max];
 		color_t size = terminal_read_str(x, y, buf, max);
 		buffer = std::string(buf);
-		delete buf;
+		delete[] buf;
 		return size;
 	}
 
