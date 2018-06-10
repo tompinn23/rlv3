@@ -23,6 +23,8 @@ matrix:
            - ubuntu-toolchain-r-test
            - llvm-toolchain-trusty-5.0
          packages:
+           - gcc-8
+           - g++-8
            - clang-5.0
      env:
        - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
