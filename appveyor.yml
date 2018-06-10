@@ -1,12 +1,6 @@
 # version format
 version: 1.0.{build}
 
-branches:
-  # whitelist
-  only:
-    - master
-    - production
-
 image: Visual Studio 2017
 
 install:
