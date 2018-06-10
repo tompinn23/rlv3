@@ -1,0 +1,26 @@
+# version format
+version: 1.0.{build}
+
+branches:
+  # whitelist
+  only:
+    - master
+    - production
+
+image: Visual Studio 2017
+
+install:
+ - cinst ninja
+
+
+configuration: Release
+
+platform:
+  - x86
+  - x64
+
+build_script:
+  - md build
+  - cd build
+  - cmake -GNinja ..
+  - ninja
