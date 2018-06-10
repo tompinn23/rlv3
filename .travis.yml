@@ -1,0 +1,18 @@
+language: cpp
+
+compiler:
+  - clang
+  - gcc
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+    - cmake
+    - gcc-8
+    - g++-8
+    
+
+
+script: cmake
