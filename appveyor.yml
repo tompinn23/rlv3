@@ -20,23 +20,21 @@ platform:
   - x64
 
 for:
-  -
-    matrix:
-	  only:
-	    - platform: x86
-	build_script:
-	  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
-  - 
-    matrix:
+  - matrix:
       only:
-	    - platform: x64
-	build_script:
-	  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
-
-
-
-build_script:
-  - md build
-  - cd build
-  - cmake -GNinja ..
-  - ninja
+        - platform: x86
+    build_script:
+      - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
+	  - md build
+      - cd build
+      - cmake -GNinja ..
+      - ninja
+  - matrix:
+      only:
+        - platform: x64
+    build_script:
+      - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
+	  - md build
+      - cd build
+      - cmake -GNinja ..
+      - ninja
